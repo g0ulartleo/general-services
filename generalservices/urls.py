@@ -17,8 +17,12 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic import RedirectView
+from services.views import LoginView
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='/dashboard/')),
+    url(r'dashboard/', include('services.urls')),
+    url(r'login/', LoginView.as_view()),
     url(r'^admin/', admin.site.urls),
-    url(r'services/', include('services.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
