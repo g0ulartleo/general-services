@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.views import generic
+from services import views
 
 urlpatterns = [
-    url('^$', generic.TemplateView.as_view(template_name="services/index.html"), name="index"),
+    url('^$', views.DashboardView.as_view()),
 ]
