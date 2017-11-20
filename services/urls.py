@@ -3,5 +3,5 @@ from django.views import generic
 from services import views
 
 urlpatterns = [
-    url('^$', views.DashboardView.as_view()),
+    url('^$', views.DashboardView.as_view(), name='dashboard'),
 ]
