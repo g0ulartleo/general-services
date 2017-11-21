@@ -8,4 +8,4 @@ class DashboardView(LoginRequiredMixin, ListView):
     login_url = '/login/'
 
     def get(self, request, **kwargs):
-        return render(request, 'services/dashboard.html')
+        return render(request, 'dashboard.html')
