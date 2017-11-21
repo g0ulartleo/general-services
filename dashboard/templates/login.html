@@ -3,7 +3,7 @@
 {% block title %}- Login{% endblock %}
 {% block content %}
 
-<link href="{% static 'services/css/login.css' %}" rel="stylesheet">
+<link href="{% static 'css/login.css' %}" rel="stylesheet">
 
 <hgroup>
   <h1>General Services</h1>
@@ -13,18 +13,21 @@
 <form action="" class="form-signin" method="POST">
   {% csrf_token %}
 
-  <div class="group">
-    <input name="email" type="email"><span class="highlight"></span><span class="bar"></span>
-    <label>E-mail</label>
-  </div>
-  <div class="group">
-    <input type="password" name="password"><span class="highlight"></span><span class="bar"></span>
-    <label>Senha</label>
-  </div>
-  <button type="submit" class="button buttonBlue">Entrar
-    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-  </button>
+    <div class="group">
+        <input name="email" type="email"><span class="bar"></span>
+        <label>E-mail</label>
+    </div>
+    <div class="group">
+        <input type="password" name="password"><span class="highlight"></span><span class="bar"></span>
+        <label>Senha</label>
+    </div>
+    <button type="submit" class="button buttonBlue">Entrar
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
 
+    <button type="button" class="button buttonBlue">Cadastrar
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
 </form>
 
 <script>
