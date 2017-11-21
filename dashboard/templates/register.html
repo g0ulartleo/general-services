@@ -10,7 +10,7 @@
   <h3>By <b>g0ulartleo</b></h3>
 </hgroup>
 
-<form action="" class="form-signin" method="POST">
+<form action="" class="form-signup" method="POST">
   {% csrf_token %}
 
     <div class="group">
@@ -18,44 +18,48 @@
         <label>E-mail</label>
     </div>
     <div class="group">
+        <input name="first_name" type="text"><span class="bar"></span>
+        <label>Primeiro nome</label>
+    </div>
+    <div class="group">
+        <input name="last_name" type="text"><span class="bar"></span>
+        <label>Último nome</label>
+    </div>
+    <div class="group">
         <input type="password" name="password"><span class="highlight"></span><span class="bar"></span>
         <label>Senha</label>
     </div>
-    <button type="submit" class="button buttonBlue">Entrar
-        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-    </button>
-
-    <button type="button" onclick="window.location.href='/register/'" class="button buttonBlue">Cadastrar
+    <button type="submit" class="button buttonBlue">Cadastrar
         <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
     </button>
 </form>
 
-<script type="text/javascript">
+<script>
     $(window, document, undefined).ready(function() {
       $("input").blur(function() {
         var $this = $(this);
         if ($this.val()) $this.addClass("used");
         else $this.removeClass("used");
       });
-    
+
       var $ripples = $(".ripples");
-    
+
       $ripples.on("click.Ripples", function(e) {
         var $this = $(this);
         var $offset = $this.parent().offset();
         var $circle = $this.find(".ripplesCircle");
-    
+
         var x = e.pageX - $offset.left;
         var y = e.pageY - $offset.top;
-    
+
         $circle.css({
           top: y + "px",
           left: x + "px"
         });
-    
+
         $this.addClass("is-active");
       });
-    
+
       $ripples.on(
         "animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd",
         function(e) {
@@ -65,4 +69,4 @@
     });
 </script>
 
-{% endblock %} 
+{% endblock %}

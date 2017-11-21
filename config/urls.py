@@ -20,12 +20,13 @@ from django.contrib import admin
 from django.contrib.auth.views import logout
 from django.views.generic import RedirectView
 
-from dashboard.views import LoginView
+from dashboard.views import LoginView, RegisterView
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/dashboard/')),
     url(r'dashboard/', include('dashboard.urls')),
     url(r'login/', LoginView.as_view()),
+    url(r'register/', RegisterView.as_view()),
     url(r'logout/', logout, {'next_page': '/login/'}, name='logout'),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
