@@ -1,0 +1,36 @@
+{% extends 'base/base_logged.html' %}
+
+{% block page_title %}Clientes{% endblock  %}
+{% block main %}
+    <div class="mdl-grid demo-content">
+        <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                    <th>Serviços prestados</th>
+                    <th class="mdl-data-table__header--sorted-descending">Último serviço</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Liam Gallagher</td>
+                    <td>250</td>
+                    <td>2017/11/10</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Noel Gallagher</td>
+                    <td>50</td>
+                    <td>2017/08/21</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Neymar</td>
+                    <td>10</td>
+                    <td>2017/08/22</td>
+                </tr>
+            </tbody>
+        </table>
+        <button style="margin-top:-10px;margin-right:15px" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+{% endblock %}
