@@ -23,8 +23,7 @@ from django.views.generic import RedirectView
 from dashboard.views import LoginView, RegisterView
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='/dashboard/')),
-    url(r'dashboard/', include('dashboard.urls')),
+    url(r'', include('dashboard.urls')),
     url(r'login/', LoginView.as_view()),
     url(r'register/', RegisterView.as_view()),
     url(r'logout/', logout, {'next_page': '/login/'}, name='logout'),
