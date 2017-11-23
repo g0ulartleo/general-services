@@ -1,7 +1,85 @@
 {% extends 'base/base_logged.html' %}
+{% load widget_tweaks %}
 
-{% block page_title %}Cliente - {{ client.first_name }} {{ client.last_name }}{% endblock  %}
+{% block page_title %}
+    {% if client %}
+        Cliente - {{ client.first_name }} {{ client.last_name }}
+    {% else %}
+        Novo cliente
+    {% endif %}
+{% endblock  %}
+
 {% block main %}
-    <div class="mdl-grid demo-content">
+    <dialog class="mdl-dialog">
+        <h4 class="mdl-dialog__title">Tem certeza?</h4>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button delete">Deletar</button>
+            <button type="button" class="mdl-button close">Cancelar</button>
+        </div>
+    </dialog>
+    <div class="mdl-grid demo-content mdl-card__supporting-text mdl-shadow--2dp">
+        <form id="client-form" method="POST" style="width: 100%; margin: 10px;">
+            {% csrf_token %}
+            {% if client %}
+                <input type="hidden" id="method-name" name="_method" value="patch">
+            {% endif %}
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.first_name|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="first_name">Nome</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.last_name|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="last_name">Sobrenome</label>
+            </div>
+            <div class="demo-separator mdl-cell--1-col"></div>
+            <div class="mdl-textfield mdl-js-textfield
+            mdl-textfield--floating-label {% if form.cpf.errors %}is-invalid{% endif%}">
+                {{ form.cpf|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="cpf">CPF</label>
+                <span class="mdl-textfield__error">{{ form.cpf.errors|escape }}</span>
+            </div>
+            <div class="demo-separator mdl-cell--1-col"></div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.primary_phone_number|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="primary_phone_number">Telefone</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.secondary_phone_number|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="secondary_phone_number">Celular</label>
+            </div>
+            <div class="demo-separator mdl-cell--1-col"></div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:57%">
+                {{ form.address|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="address">Endereço</label>
+            </div>
+            <div class="demo-separator mdl-cell--1-col" style="margin-top:50px;"></div>
+            <input type="submit" value="Salvar"
+                   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            {% if client %}
+            <button class="mdl-button mdl-js-button mdl-button--raised" style="float: right" id="delete_client">
+                Excluir
+            </button>
+            {% endif %}
+        </form>
     </div>
+
+    <script type="text/javascript">
+        $('#delete_client').on('click', function(e){
+            e.preventDefault();
+            var dialog = document.querySelector('dialog');
+            if (! dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+            dialog.showModal();
+            dialog.querySelector('.close').addEventListener('click', function() {
+                dialog.close();
+            });
+            dialog.querySelector('.delete').addEventListener('click', function() {
+                $("#method-name")[0].value = 'delete';
+                $("#client-form").submit();
+            });
+        });
+    </script>
+
 {% endblock %}
