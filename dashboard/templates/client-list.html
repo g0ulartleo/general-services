@@ -1,0 +1,33 @@
+{% extends 'base/base_logged.html' %}
+
+{% block page_title %}Clientes{% endblock  %}
+{% block main %}
+    <div class="mdl-grid demo-content">
+        <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                    <th class="mdl-data-table__cell--non-numeric">Endereço</th>
+                    <th>Serviços prestados</th>
+                    <th class="mdl-data-table__header--sorted-descending">Último serviço</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">{{ client.first_name }} {{ client.last_name }}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{ client.address }}</td>
+                        <td>250</td>
+                        <td>2017/11/10</td>
+                        <td><a href="{{client.id}}">Detalhes</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button style="margin-top:-10px;margin-right:15px" onclick="window.location.href = '/client/0'"
+                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+{% endblock %}
