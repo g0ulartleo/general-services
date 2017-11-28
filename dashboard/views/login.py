@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
+
 class LoginView(ListView):
 
     def get(self, request, **kwargs):
@@ -19,7 +20,6 @@ class LoginView(ListView):
             login(request, user)
             return HttpResponseRedirect("/dashboard")
         data = {
-            'error':True
+            'error': True
         }
         return render(request, 'login.html', data)
-

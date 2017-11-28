@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.contrib.auth import authenticate, login
 
+
 class DashboardView(LoginRequiredMixin, ListView):
     login_url = '/login/'
 

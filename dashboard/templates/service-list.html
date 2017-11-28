@@ -1,0 +1,31 @@
+{% extends 'base/base_logged.html' %}
+
+{% block page_title %}Catálogo de serviços{% endblock  %}
+{% block main %}
+    <div class="mdl-grid demo-content">
+        <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                    <th class="mdl-data-table__cell--non-numeric">Data de criação</th>
+                    <th>Preço base</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">{{ service.name }}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{ service.created_at }}</td>
+                        <td>R$ {{ service.base_price }}</td>
+                        <td><a href="{{ service.id }}">Detalhes</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button style="margin-top:-10px;margin-right:15px" onclick="window.location.href = '/service/0'"
+                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+{% endblock %}

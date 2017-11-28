@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 
 class RegisterView(ListView):
+
     def get(self, request, **kwargs):
         return render(request, 'register.html')
 

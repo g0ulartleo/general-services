@@ -1,0 +1,71 @@
+{% extends 'base/base_logged.html' %}
+{% load widget_tweaks %}
+
+{% block page_title %}
+    {% if service %}
+        Serviço - {{ service.name }}
+    {% else %}
+        Novo serviço
+    {% endif %}
+{% endblock  %}
+
+{% block main %}
+    <dialog class="mdl-dialog">
+        <h4 class="mdl-dialog__title">Tem certeza?</h4>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button delete">Deletar</button>
+            <button type="button" class="mdl-button close">Cancelar</button>
+        </div>
+    </dialog>
+    <div>
+        {{ form.errors }}
+    </div>
+    <div class="mdl-grid demo-content mdl-card__supporting-text mdl-shadow--2dp">
+        <form id="service-form" method="POST" style="width: 100%; margin: 10px;">
+            {% csrf_token %}
+            {% if service %}
+                <input type="hidden" id="method-name" name="_method" value="patch">
+            {% endif %}
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.name|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="name">Nome</label>
+            </div>
+
+            <div class="demo-separator mdl-cell--1-col"></div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.base_price|add_class:"mdl-textfield__input"}}
+                <label class="mdl-textfield__label" for="base_price">Preço base (R$)</label>
+            </div>
+
+            <div class="demo-separator mdl-cell--1-col" style="margin-top:50px;"></div>
+            <input type="submit" value="Salvar"
+                   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            {% if service %}
+            <button class="mdl-button mdl-js-button mdl-button--raised" style="float: right" id="delete_service">
+                Excluir
+            </button>
+            {% endif %}
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $('#delete_service').on('click', function(e){
+            e.preventDefault();
+            var dialog = document.querySelector('dialog');
+            if (! dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+            dialog.showModal();
+            dialog.querySelector('.close').addEventListener('click', function() {
+                dialog.close();
+            });
+            dialog.querySelector('.delete').addEventListener('click', function() {
+                $("#method-name")[0].value = 'delete';
+                $("#service-form").submit();
+            });
+        });
+    </script>
+
+{% endblock %}
