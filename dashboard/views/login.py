@@ -20,6 +20,6 @@ class LoginView(ListView):
             login(request, user)
             return HttpResponseRedirect("/dashboard")
         data = {
-            'error': True
+            'error': 'Login inválido'
         }
         return render(request, 'login.html', data)

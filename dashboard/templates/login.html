@@ -9,8 +9,12 @@
   <h1>General Services</h1>
   <h3>By <b>g0ulartleo</b></h3>
 </hgroup>
-
 <form action="" class="form-signin" method="POST">
+  <div style="text-align: center; color: red; margin-bottom: 10px;">
+    {% if error %}
+      {{ error }}
+    {% endif %}
+  </div>
   {% csrf_token %}
 
     <div class="group">
